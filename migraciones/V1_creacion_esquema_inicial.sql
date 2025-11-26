@@ -1,35 +1,35 @@
 CREATE TABLE usuarios (
-    id INT SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nombre VARCHAR(25) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
     rol VARCHAR(10) NOT NULL,
-    constraseña VARCHAR(15) NOT NULL
+    constrasena VARCHAR(15) NOT NULL
 ); 
 
 CREATE TABLE clientes (
-    id INT SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nombre VARCHAR(25) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
-    telefono VARCHAR,
+    telefono VARCHAR(15),
     fecha_alta DATE NOT NULL DEFAULT CURRENT_DATE,
     fecha_vencimiento DATE NOT NULL,
     usuario_id INT,
 
-    CONSTRAINT fk_usuario
+    CONSTRAINT fk_cliente_usuario
         FOREIGN KEY(usuario_id)
         REFERENCES usuarios(id) 
         ON DELETE SET NULL
 );
 
 CREATE TABLE membresias (
-    id INT SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nombre VARCHAR(10) NOT NULL,
     duracion_dias INT NOT NULL,
-    precio FLOAT NOT NULL
+    precio NUMERIC(10,2) NOT NULL
 );
 
 CREATE TABLE pagos (
-    id INT SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     fecha_pago DATE NOT NULL DEFAULT CURRENT_DATE,
     cliente_id INT,
     membresia_id INT,
@@ -45,7 +45,7 @@ CREATE TABLE pagos (
         REFERENCES membresias(id)
         ON DELETE SET NULL,
 
-    CONSTRAINT fk_usuario
+    CONSTRAINT fk_pago_usuario
         FOREIGN KEY (usuario_id)
         REFERENCES usuarios(id)
         ON DELETE SET NULL
