@@ -3,7 +3,7 @@ CREATE TABLE usuarios (
     nombre VARCHAR(25) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
     rol VARCHAR(10) NOT NULL,
-    constrasena VARCHAR(15) NOT NULL
+    contrasena VARCHAR(15) NOT NULL
 ); 
 
 CREATE TABLE clientes (
