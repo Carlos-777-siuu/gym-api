@@ -11,10 +11,11 @@ class TestUsuarioRepositorio:
             id=None,
             nombre="Carlos",
             email="carlos@test.com",
-            rol="admin"
+            rol="admin",
+            hash_contrasena = "1234"
         )
 
-        usuario_creado = repo.crear_usuario(usuario, "123456")
+        usuario_creado = repo.crear_usuario(usuario)
 
         assert usuario_creado.id is not None
 
@@ -31,10 +32,10 @@ class TestUsuarioRepositorio:
     def test_buscar_usuario_existente(self, db_conn):
         repo = UsuarioRepositorio(db_conn)
 
-        usuario = Usuario(None, "Ana", "ana@test.com", "user")
-        repo.crear_usuario(usuario, "abc123")
+        usuario = Usuario(None, "Ana", "ana@test.com", "user", "abc123")
+        repo.crear_usuario(usuario)
 
-        usuario_encontrado = repo.buscar_usuario("Ana")
+        usuario_encontrado = repo.buscar_usuario("ana@test.com")
 
         assert usuario_encontrado is not None
         assert usuario_encontrado.nombre == "Ana"
@@ -53,30 +54,31 @@ class TestUsuarioRepositorio:
         repo = UsuarioRepositorio(db_conn)
 
         repo.crear_usuario(
-            Usuario(None, "U1", "u1@test.com", "user"), "1"
+            Usuario(None, "U1", "u1@test.com", "user", "1")
         )
         repo.crear_usuario(
-            Usuario(None, "U2", "u2@test.com", "admin"), "2"
+            Usuario(None, "U2", "u2@test.com", "admin", "2")
         )
 
         usuarios = repo.mostrar_todos_usuarios()
 
         assert len(usuarios) == 2
-        nombres = {u["nombre"] for u in usuarios}
+        nombres = {u.nombre for u in usuarios}
         assert nombres == {"U1", "U2"}
 
 
     def test_actualizar_usuario(self, db_conn):
         repo = UsuarioRepositorio(db_conn)
 
-        usuario = Usuario(None, "Luis", "luis@test.com", "user")
-        repo.crear_usuario(usuario, "pass")
+        usuario = Usuario(None, "Luis", "luis@test.com", "user", "admin123")
+        repo.crear_usuario(usuario)
 
         nuevo_usuario = Usuario(
             id=None,
             nombre="Luis Mod",
             email="luis_mod@test.com",
-            rol="admin"
+            rol="admin",
+            hash_contrasena=usuario.contrasena
         )
 
         repo.actualizar_usuario(usuario.id, nuevo_usuario)
@@ -95,8 +97,8 @@ class TestUsuarioRepositorio:
     def test_eliminar_usuario(self, db_conn):
         repo = UsuarioRepositorio(db_conn)
 
-        usuario = Usuario(None, "Delete", "delete@test.com", "user")
-        repo.crear_usuario(usuario, "pass")
+        usuario = Usuario(None, "Delete", "delete@test.com", "user", "pass")
+        repo.crear_usuario(usuario)
 
         repo.eliminar_usuario(usuario.id)
 

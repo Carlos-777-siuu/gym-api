@@ -4,7 +4,15 @@ class Membresias:
         self.nombre_membresia = nombre
         self.duracion_dias = duracion_dias
         self.precio_membresia = precio
-        
+
+    @classmethod
+    def from_row(cls, row: dict):
+        return cls(
+            id= row["id"],
+            nombre_membresia=row["nombre_membresia"],
+            duracion_dias = row["duracion_dias"],
+            precio_membresia = row["precio_membresia"]
+        )
 
     def to_dict(self):
         return {
@@ -12,5 +20,4 @@ class Membresias:
             "nombre_membresia": self.nombre_membresia,
             "duracion_dias": self.duracion_dias,
             "precio_membresia": self.precio_membresia,
-            "pagos_membresia": self.pagos_membresia
         }

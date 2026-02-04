@@ -1,9 +1,20 @@
 class Usuario:
-    def __init__(self,id, nombre, email, rol):
+    def __init__(self,id, nombre, email, rol, hash_contrasena):
         self.id = id
         self.nombre = nombre
         self.email = email
         self.rol = rol
+        self.contrasena = hash_contrasena
+
+    @classmethod
+    def from_row(cls, row: dict):
+        return cls(
+            id= row["id"],
+            nombre=row["nombre"],
+            email = row["email"],
+            rol = row["rol"],
+            hash_contrasena= row["contrasena"]
+        )
 
     def to_dict(self):
         return {
