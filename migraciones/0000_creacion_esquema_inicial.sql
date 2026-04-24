@@ -1,3 +1,6 @@
+--Creamos el equema inicial de la base de datos segun el diagrama ER 
+--depends: 
+
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(25) NOT NULL,
