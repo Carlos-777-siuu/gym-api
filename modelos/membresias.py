@@ -18,8 +18,9 @@ class Membresia:
 
     def to_dict(self):
         return {
-            "membresia_id": self.id,
+            "id": self.id,
             "nombre_membresia": self.nombre_membresia,
             "duracion_dias": self.duracion_dias,
             "precio_membresia": self.precio_membresia,
+            "activo": self.activa
         }

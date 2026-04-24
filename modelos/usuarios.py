@@ -22,6 +22,7 @@ class Usuario:
                 "id": self.id,
                 "nombre": self.nombre,
                 "email": self.email,
-                "rol": self.rol
+                "rol": self.rol,
+                "activo": self.activo
                 }
 

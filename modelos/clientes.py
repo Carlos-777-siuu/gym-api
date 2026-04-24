@@ -30,6 +30,7 @@ class Cliente:
                 "telefono": self.telefono,
                 "fecha_alta": self.fecha_alta,
                 "fecha_vencimiento": self.fecha_vencimiento,
-                "usuario_id": self.usuario_id
+                "usuario_id": self.usuario_id,
+                "activo": self.activo
                 }
     

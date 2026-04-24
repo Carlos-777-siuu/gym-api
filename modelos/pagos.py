@@ -20,7 +20,7 @@ class Pago:
     
     def to_dict(self):
         return {
-                "pago_id": self.id,
+                "id": self.id,
                 "fecha_pago": self.fecha_pago,
                 "monto": self.monto,
                 "cliente_id": self.cliente_id,
