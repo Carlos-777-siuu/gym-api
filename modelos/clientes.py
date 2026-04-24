@@ -1,5 +1,5 @@
 class Cliente:
-    def __init__(self, id, nombre, email, telefono, fecha_alta, fecha_vencimiento, usuario_id):
+    def __init__(self, id, nombre, email, telefono, fecha_alta, fecha_vencimiento, usuario_id, activo):
         self.id = id
         self.nombre = nombre
         self.email = email
@@ -7,6 +7,7 @@ class Cliente:
         self.fecha_alta = fecha_alta
         self.fecha_vencimiento = fecha_vencimiento
         self.usuario_id = usuario_id
+        self.activo = activo
     
     @classmethod
     def from_row(cls, row: dict):
@@ -17,7 +18,8 @@ class Cliente:
             telefono = row["telefono"],
             fecha_alta = row["fecha_alta"],
             fecha_vencimiento = row["fecha_vencimiento"],
-            usuario_id = row["usuario_id"]
+            usuario_id = row["usuario_id"],
+            activo = row["activo"]
         )
     
     def to_dict(self):

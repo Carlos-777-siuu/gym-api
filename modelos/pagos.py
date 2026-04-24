@@ -1,4 +1,4 @@
-class Pagos:
+class Pago:
     def __init__(self,id,fecha_pago,monto, cliente_id, usuario_id, membresia_id):
         self.id = id
         self.fecha_pago = fecha_pago

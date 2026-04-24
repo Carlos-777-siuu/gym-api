@@ -1,9 +1,10 @@
 class Membresia:
-    def __init__(self,id,nombre_membresia,duracion_dias,precio_membresia):
+    def __init__(self,id,nombre_membresia,duracion_dias,precio_membresia, activo):
         self.id = id
         self.nombre_membresia = nombre_membresia
         self.duracion_dias = duracion_dias
         self.precio_membresia = precio_membresia
+        self.activa = activo
 
     @classmethod
     def from_row(cls, row: dict):
@@ -11,7 +12,8 @@ class Membresia:
             id= row["id"],
             nombre_membresia=row["nombre"],
             duracion_dias = row["duracion_dias"],
-            precio_membresia = row["precio"]
+            precio_membresia = row["precio"],
+            activo = row["activo"]
         )
 
     def to_dict(self):
